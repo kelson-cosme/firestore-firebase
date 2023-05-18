@@ -20,24 +20,33 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const [nome, setNome] = useState([])
+const [nome1, setNome1] = useState([])
 
 useEffect(() => {
   async function getAlunos(db) {
     const alunos = collection(db, 'turmaA');
     const alunosSnapshot = await getDocs(alunos);
     setNome(alunosSnapshot.docs.map(doc => doc.data()))
-        nome.forEach((doc) => { //ler os dados de todas coleção
-          console.log(doc.nome)
-        })
+    
+    // nome.forEach((doc) => { //ler os dados de todas coleção
+        //   console.log(doc.nome)
+        // })
   }
   getAlunos(db)  
+
 },[])
 
 
- 
+let testa;
 
-
-
+function verAlunos(){
+  nome.forEach((e) => {
+    testa = e.nome
+    let h1 = document.getElementById("titulo")
+    h1.innerHTML = testa
+    console.log(testa)
+  })
+}
 
 // const [endereco, setEndereco] = useState({})
 
@@ -61,7 +70,8 @@ useEffect(() => {
 
   return (
     <div>
-      <h1>koo</h1>
+      <button onClick={verAlunos}>ver alunos</button>
+      <h1 id='titulo'></h1>
     </div>
   );
 }
