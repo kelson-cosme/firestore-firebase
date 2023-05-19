@@ -1,7 +1,7 @@
 import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, where, query, setDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc} from 'firebase/firestore';
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -28,14 +28,14 @@ useEffect(() => {
 
     // ------------
     //Adicionar um novo documento a seleção 
-      await setDoc(doc(db, "turmaA", '4a1'),{
-        nome: "aaaaaa",
-        sobrenome: "Leandro",
-        notas: {
-          nota1: 9.5,
-          nota2: 9.1
-        }
-      })    
+      // await addDoc(collection(db, "turmaA"),{
+      //   nome: "aaaaaa",
+      //   sobrenome: "Leandro",
+      //   notas: {
+      //     nota1: 9.5,
+      //     nota2: 9.1
+      //   }
+      // })    
 
     // ------------
     //Filtro para os nomes iguais
