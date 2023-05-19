@@ -1,7 +1,7 @@
 import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, where, query } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc } from 'firebase/firestore';
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -23,30 +23,30 @@ const [nome, setNome] = useState([])
 const [nome1, setNome1] = useState([])
 
 
-// const alunosRef = collection(db, "turmaA");
-// const q = query(alunosRef, where("nome", "==", "Kelson"));
-
-// const querySnapshot = await getDocs(q);
-// querySnapshot.forEach((doc) => {
-//   // doc.data() is never undefined for query doc snapshots
-//   console.log(doc.id, " => ", doc.data());
-// });
-
 useEffect(() => {
-
-
-  // ------------
-  //Filtro para os nomes iguais
   async function getAlunos(db) {
-    const alunos = collection(db, 'turmaA');
-    const q = query(alunos, where("nome", "==", "Kelson"));
 
-    const alunosSnapshot = await getDocs(q);
-    alunosSnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.data().nome, doc.data().sobrenome);
-      });
-  
+    // ------------
+    //Adicionar um novo documento a seleção 
+      await setDoc(doc(db, "turmaA", '4a1'),{
+        nome: "aaaaaa",
+        sobrenome: "Leandro",
+        notas: {
+          nota1: 9.5,
+          nota2: 9.1
+        }
+      })    
+
+    // ------------
+    //Filtro para os nomes iguais
+    // const alunos = collection(db, 'turmaA');
+    // const q = query(alunos, where("nome", "==", "Kelson"));
+
+    // const alunosSnapshot = await getDocs(q);
+    // alunosSnapshot.forEach((doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     console.log(doc.data().nome, doc.data().sobrenome);
+    //   });
   // ------------
   //Filtro para as notas maiores que 5
   // async function getAlunos(db) {
