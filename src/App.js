@@ -2,7 +2,7 @@ import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
 const firebaseConfig = {
@@ -39,12 +39,10 @@ useEffect(() => {
 
 function verAlunos(){
 
-  setNome1(nome.map(( nome ) => ({
-    nomess: nome.nome
-   })))
+  setNome1(nome.map( (nome, key) => (
+        <li key={key}>{nome.nome}</li>
+    )))
   
-  console.log(nome1 = nome1.jason); 
-  console.log(nome)
 }
 
 
@@ -71,7 +69,9 @@ function verAlunos(){
   return (
     <div>
       <button onClick={verAlunos}>ver alunos</button>
-      <h1>{}</h1>
+        <ul>
+          {nome1}
+        </ul>
     </div>
   );
 }
