@@ -37,16 +37,16 @@ useEffect(() => {
 },[])
 
 
-let testa;
-
 function verAlunos(){
-  nome.forEach((e) => {
-    testa = e.nome
-    let h1 = document.getElementById("titulo")
-    h1.innerHTML = testa
-    console.log(testa)
-  })
+
+  setNome1(nome.map(( nome ) => ({
+    nomess: nome.nome
+   })))
+  
+  console.log(nome1 = nome1.jason); 
+  console.log(nome)
 }
+
 
 // const [endereco, setEndereco] = useState({})
 
@@ -71,7 +71,7 @@ function verAlunos(){
   return (
     <div>
       <button onClick={verAlunos}>ver alunos</button>
-      <h1 id='titulo'></h1>
+      <h1>{}</h1>
     </div>
   );
 }
