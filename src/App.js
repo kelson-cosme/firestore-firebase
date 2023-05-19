@@ -1,7 +1,7 @@
 import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc} from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, updateDoc } from 'firebase/firestore';
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -26,6 +26,13 @@ const [nome1, setNome1] = useState([])
 useEffect(() => {
   async function getAlunos(db) {
 
+    // ------------
+    // //Atualizar um documento a seleção 
+    // const teste = doc(db, "turmaA", "VnDBKHxlIJ1P0jSCXFRk");
+    // await updateDoc(teste, {
+    //   nome: "Fermino",
+    //   sobrenome: "Almeida"
+    // });
     // ------------
     //Adicionar um novo documento a seleção 
       // await addDoc(collection(db, "turmaA"),{
