@@ -1,7 +1,7 @@
 import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, where, query } from 'firebase/firestore';
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -22,29 +22,54 @@ const db = getFirestore(app);
 const [nome, setNome] = useState([])
 const [nome1, setNome1] = useState([])
 
+
+// const alunosRef = collection(db, "turmaA");
+// const q = query(alunosRef, where("nome", "==", "Kelson"));
+
+// const querySnapshot = await getDocs(q);
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, " => ", doc.data());
+// });
+
 useEffect(() => {
+
+
+  // ------------
+  //Filtro para os nomes iguais
   async function getAlunos(db) {
     const alunos = collection(db, 'turmaA');
-    const alunosSnapshot = await getDocs(alunos);
-    setNome(alunosSnapshot.docs.map(doc => doc.data()))
+    const q = query(alunos, where("nome", "==", "Kelson"));
+
+    const alunosSnapshot = await getDocs(q);
+    alunosSnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.data().nome, doc.data().sobrenome);
+      });
+  
+  // ------------
+  //Filtro para as notas maiores que 5
+  // async function getAlunos(db) {
+  //   const alunos = collection(db, 'turmaA');
+  //   const q = query(alunos, where("notas.nota1", ">", 5));
+
+  //   const alunosSnapshot = await getDocs(q);
+  //   alunosSnapshot.forEach((doc) => {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.data().nome);
+  //     });
     
-    // nome.forEach((doc) => { //ler os dados de todas coleção
-        //   console.log(doc.nome)
-        // })
   }
   getAlunos(db)  
-
 },[])
 
 
-function verAlunos(){
+// function verAlunos(){
 
-  setNome1(nome.map( (nome, key) => (
-        <li key={key}>{nome.nome}</li>
-    )))
-  
-}
-
+//   setNome1(nome.map( (nome) => (
+//       <li>{nome.nome}</li>
+//     )))
+// }
 
 // const [endereco, setEndereco] = useState({})
 
@@ -68,9 +93,7 @@ function verAlunos(){
 
   return (
     <div>
-      <button onClick={verAlunos}>ver alunos</button>
-        <ul>
-          {nome1}
+      <ul>
         </ul>
     </div>
   );
