@@ -2,7 +2,7 @@ import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, updateDoc, increment, deleteDoc, deleteField  } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut , signInWithEmailAndPassword } from "firebase/auth";
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -27,18 +27,51 @@ const [nome1, setNome1] = useState([])
 useEffect(() => {
   async function getAlunos(db) {
     
+    
+    //FAZER LOGIN DOS USUARIOS
+    // const auth = getAuth();
+    // signInWithEmailAndPassword(auth, "kelson.almeida@outlook.com", "abc123")
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log("Signed in", user)
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //   });
+    //------------------------------------
+    //DESLOGAR USUÁRIOS
+    // const auth = getAuth();
+    // signOut(auth).then(() => {
+    //   console.log("Sign-out successful")
+    //   // Sign-out successful.
+    // }).catch((error) => {
+    //   // An error happened.
+    // });
+    //------------------------------------
+    //VER USUARIOS LOGADOS
+    // const auth = getAuth();
+    // onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     const uid = user.uid;
+    //     console.log(uid)
+    //   } else {
+    //     console.log("Ninguem conectado")
+    //   }
+    // });
+    //------------------------------------
     //CRIAR USUÁRIOS
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, "kelson.almeida@outlook.com", "abc123")
-    .then((userCredential) => {
-    const user = userCredential.user;
-      console.log(user)
-  })
-    .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-      console.log(error, errorMessage)
-  });
+  //   const auth = getAuth();
+  //   createUserWithEmailAndPassword(auth, "kelson.almeida@outlook.com", "abc123")
+  //   .then((userCredential) => {
+  //   const user = userCredential.user;
+  //     console.log(user)
+  // })
+  //   .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //     console.log(error, errorMessage)
+  // });
     
     
     //====================
