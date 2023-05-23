@@ -1,7 +1,8 @@
 import './App.css';
 import { } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js'
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, updateDoc, increment  } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, setDoc, doc, addDoc, updateDoc, increment, deleteDoc, deleteField  } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import React, {useState, useEffect, useLayoutEffect} from "react";
 
 
@@ -25,13 +26,31 @@ const [nome1, setNome1] = useState([])
 
 useEffect(() => {
   async function getAlunos(db) {
+    
+    //CRIAR USUÁRIOS
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, "kelson.almeida@outlook.com", "abc123")
+    .then((userCredential) => {
+    const user = userCredential.user;
+      console.log(user)
+  })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+      console.log(error, errorMessage)
+  });
+    
+    
+    //====================
+    // Apagar algum campo
+    // const teste = doc(db, "turmaA", "QHf1BJhTSB6qrxsNJKiY");
+    // await deleteDoc(doc(db, "turmaA", "QHf1BJhTSB6qrxsNJKiY"));
     // ------------
     //Encrementar
-    const teste = doc(db, "turmaA", "QHf1BJhTSB6qrxsNJKiY");
-    await updateDoc(teste, {
-      faltas: increment(10)
-    });
-    // -----
+    // const teste = doc(db, "turmaA", "QHf1BJhTSB6qrxsNJKiY");
+    // await updateDoc(teste, {
+    //   faltas: increment(10)
+    // });
     // ------------
     // //Atualizar um documento a seleção 
     // const teste = doc(db, "turmaA", "VnDBKHxlIJ1P0jSCXFRk");
@@ -42,12 +61,8 @@ useEffect(() => {
     // ------------
     //Adicionar um novo documento a seleção 
       // await addDoc(collection(db, "turmaA"),{
-      //   nome: "aaaaaa",
-      //   sobrenome: "Leandro",
-      //   notas: {
-      //     nota1: 9.5,
-      //     nota2: 9.1
-      //   }
+      //   nome: "Kelson",
+      //   sobrenome: "Cosme",
       // })    
 
     // ------------
